@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Validar e-mail</title>
+    <script>
+      function validacaoEmail(field) {
+        usuario = field.value.substring(0, field.value.indexOf("@"));
+        dominio = field.value.substring(
+          field.value.indexOf(
+            "@gmail.com, @hotmail.com, @hotmail.com.br, @yahoo.com, @yahoo.com.br, @outlook.com"
+          ) + 1,
+          field.value.length
+        );
+        if (
+          usuario.length >= 1 &&
+          dominio.length >= 3 &&
+          usuario.search("@") == -1 &&
+          dominio.search("@dnadevendas.com.br") == -1 &&
+          usuario.search(" ") == -1 &&
+          dominio.search(" ") == -1 &&
+          dominio.search(".") != -1 &&
+          dominio.indexOf(".") >= 1 &&
+          dominio.lastIndexOf(".") < dominio.length - 1
+        ) {
+          document.getElementById("msgemail").innerHTML =
+            "<font color='red'>E-mail inválido </font>";
+          alert("Digite seu e-mail corporativo para prosseguir");
+        } else {
+          document.getElementById("msgemail").innerHTML =
+            "<font color='green'>Email válido </font>";
+          alert("E-mail válido");
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <form name="form1">
+      <h3>Validar E-mail</h3>
+      <hr color="#ccc" />
+      <table>
+        <tr>
+          <td>
+            E-mail:
+            <input
+              type="text"
+              name="email"
+              onblur="validacaoEmail(form1.email)"
+              maxlength="60"
+              size="65"
+            />
+          </td>
+          <td>
+            <div id="msgemail"></div>
+          </td>
+        </tr>
+      </table>
+
+      <hr color="#ccc" />
+    </form>
+  </body>
+</html>
